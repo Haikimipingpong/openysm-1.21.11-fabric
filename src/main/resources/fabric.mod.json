@@ -3,7 +3,7 @@
   "id": "yes_steve_model",
   "version": "${version}",
   "name": "Yes Steve Model",
-  "description": "Unofficial Minecraft 1.21.11 / Fabric port of OpenYSM. Upstream OpenYSM targets 1.20.1 Forge only; the original author of this 1.21.11 adaptation is unknown.",
+  "description": "Unofficial Minecraft 1.21.11 / Fabric port of OpenYSM, made for macOS players and able to work with TaCZ. Unmaintained / barely maintained. Upstream OpenYSM targets 1.20.1 Forge only; the original author of this 1.21.11 adaptation is unknown.",
   "authors": [
     "OpenYSM (upstream, 1.20.1 Forge)",
     "Anonymous (1.21.11 Fabric port)"

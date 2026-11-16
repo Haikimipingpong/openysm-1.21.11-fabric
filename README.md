@@ -1,5 +1,10 @@
 # OpenYSM 1.21.11 / Fabric —— 非官方移植（源码）
 
+> ## ⚠️ 维护状态：**不维护 / 极少维护**
+> 这是一份**给 macOS 上的 Minecraft 1.21.11 + Fabric 玩家**准备的 YSM 替代品：能加载 `.ysm` 模型，
+> 也能适配 TaCZ。**作者不打算持续维护**——不保证跟进新版本、不保证修 bug、不保证回 issue。
+> 能用就用；不能用就 fork 走，或者自己改。仅作存档与自用发布。
+
 > ## 🔗 配套仓库：**[YSM x TaCZ Bridge →](https://github.com/Haikimipingpong/ysm-tacz-bridge)**
 > 用现成的 `openysm-fabric-2.6.5.9` jar（非上游发布）？装那个桥接模组就行，不用改 jar。
 > 用本仓库这份移植源码构建？TaCZ 联动已经内置，**不要再装桥接模组**。
@@ -12,6 +17,19 @@
 
 [OpenYSM](https://github.com/OpenYSM/OpenYSM) 是 Yes Steve Model (YSM) 的开源替代实现：用 GeckoLib
 加载 `.ysm` 模型与动画，替换玩家模型。本仓库是它面向 **Minecraft 1.21.11 + Fabric** 的一份可用源码。
+
+## 定位与维护状态
+
+| 项目 | 说明 |
+|---|---|
+| 目标用户 | **macOS** 上玩 Minecraft 的玩家（Apple Silicon 与 Intel 都可） |
+| 平台 | Minecraft **1.21.11** + **Fabric**（Loader ≥ 0.19，Java 21） |
+| 功能 | **YSM 的替代品**：加载 `.ysm` 模型 / 动画 / 换装，**可适配 TaCZ**（持枪、瞄准、开火动画） |
+| 维护 | **不维护 / 极少维护**。不承诺跟进新版本、不承诺修 bug、不承诺回 issue |
+| 定位 | 自用 + 存档。要长期可用的版本，建议 fork 后自行维护，或等上游自己做 Fabric |
+
+macOS 相关的问题已经踩过一遍（原生库签名、SIMD 加速回退，见下面「本仓库做了什么」），
+Linux / Windows 也能跑，但**没有专门测过**，也没打算测。
 
 ## 这份代码是哪来的（请先读这一段）
 
@@ -112,6 +130,11 @@ gradle build --console=plain
 
 A community port of [OpenYSM](https://github.com/OpenYSM/OpenYSM) to **Minecraft 1.21.11 / Fabric**.
 Unofficial; not affiliated with or endorsed by the OpenYSM authors.
+
+**Who this is for / maintenance:** a YSM replacement for **macOS players on Minecraft 1.21.11 +
+Fabric**, with optional TaCZ support. It is **unmaintained / barely maintained**: no tracking of
+new Minecraft or mod versions, no bug-fix promises, no support. Fork it if you need something
+that lasts.
 
 **Provenance, in short:** upstream OpenYSM ships **Minecraft 1.20.1 / Forge only** — there is no
 1.21.11 or Fabric release by its authors. The 1.21.11 / Fabric code in this repository was **found
