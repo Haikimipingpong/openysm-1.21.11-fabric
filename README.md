@@ -1,5 +1,9 @@
 # OpenYSM 1.21.11 / Fabric —— 非官方移植（源码）
 
+> ## 🔗 配套仓库：**[YSM x TaCZ Bridge →](https://github.com/Haikimipingpong/ysm-tacz-bridge)**
+> 用官方的 `openysm-fabric-2.6.5.9` jar？装那个桥接模组就行（不改官方 jar）。
+> 用本仓库这份移植源码构建？TaCZ 联动已经内置，**不要再装桥接模组**。
+
 > 非官方项目，与 OpenYSM 上游、Yes Steve Model 官方及其作者没有隶属关系，也没有获得任何授权或背书。
 
 [English](#english)
@@ -117,3 +121,7 @@ If you are that porter, please open an issue so we can credit you — or ask us 
 
 Everything here is MIT-licensed, matching upstream. No Mojang assets and no third-party mod jars
 are included.
+
+**Companion repository:** [YSM x TaCZ Bridge](https://github.com/Haikimipingpong/ysm-tacz-bridge) —
+a mixin patch that adds TaCZ support to the *official* 2.6.5.9 jar. TaCZ support is already built
+into this port, so install one or the other, never both.
