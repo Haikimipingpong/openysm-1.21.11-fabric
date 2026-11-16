@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "yes_steve_model",
+  "version": "${version}",
+  "name": "Yes Steve Model",
+  "description": "Unofficial Minecraft 1.21.11 / Fabric port of OpenYSM. Upstream OpenYSM targets 1.20.1 Forge only; the original author of this 1.21.11 adaptation is unknown.",
+  "authors": [
+    "OpenYSM (upstream, 1.20.1 Forge)",
+    "Anonymous (1.21.11 Fabric port)"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Haikimipingpong/openysm-1.21.11-fabric",
+    "issues": "https://github.com/Haikimipingpong/openysm-1.21.11-fabric/issues"
+  },
+  "license": "MIT",
+  "icon": "yesstevemodel.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.elfmcys.yesstevemodel.fabric.YesSteveModelFabric"
+    ],
+    "client": [
+      "com.elfmcys.yesstevemodel.fabric.client.YesSteveModelFabricClient"
+    ],
+    "cardinal-components-entity": [
+      "com.elfmcys.yesstevemodel.fabric.YsmComponents"
+    ]
+  },
+  "mixins": [
+    "yes_steve_model.mixins.json",
+    "yes_steve_model_fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21"
+  },
+  "suggests": {
+    "another-mod": "*"
+  },
+  "custom": {
+    "cardinal-components": [
+      "yes_steve_model:star_models",
+      "yes_steve_model:auth_models",
+      "yes_steve_model:model_info",
+      "yes_steve_model:projectile_model",
+      "yes_steve_model:vehicle_model"
+    ]
+  }
+}

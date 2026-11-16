@@ -1,0 +1,66 @@
+plugins {
+    id 'fabric-loom' version '1.19.4'
+}
+
+version = "${mod_version}-fabric"
+group = project.maven_group
+
+base {
+    archivesName = project.archives_name
+}
+
+repositories {
+    maven { name = 'AliyunCentral'; url = 'https://maven.aliyun.com/repository/public' }
+    maven { name = 'AliyunGradle'; url = 'https://maven.aliyun.com/repository/gradle-plugin' }
+    maven { name = 'Fabric'; url = 'https://maven.fabricmc.net/' }
+    maven { name = 'Architectury'; url = 'https://maven.architectury.dev/' }
+    maven { name = 'Ladysnake'; url = 'https://maven.ladysnake.org/releases' }
+    maven { name = 'Modrinth'; url = 'https://api.modrinth.com/maven' }
+    flatDir { dirs 'libs' }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings loom.officialMojangMappings()
+
+    modImplementation "net.fabricmc:fabric-loader:${loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+
+    // Architectury API: 只当普通 API 依赖用（不再使用 architectury 插件/多平台源码集）
+    modImplementation "dev.architectury:architectury-fabric:${architectury_api_version}"
+    include "dev.architectury:architectury-fabric:${architectury_api_version}"
+
+    // Cardinal Components: Fabric 侧的 capability 实现
+    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-base:${cardinal_components_version}"
+    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${cardinal_components_version}"
+    include "org.ladysnake.cardinal-components-api:cardinal-components-base:${cardinal_components_version}"
+    include "org.ladysnake.cardinal-components-api:cardinal-components-entity:${cardinal_components_version}"
+
+    // TaCZ（Timeless & Classics Zero）Refabricated 1.21.11：仅编译期依赖，运行时可选
+    modCompileOnly files('libs/TACZ-Refabricated-1.21.11.jar')
+}
+
+loom {
+    runs {
+        client { client() }
+        server { server() }
+    }
+}
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+    options.compilerArgs.addAll(['-Xmaxerrs', '20000', '-Xlint:none', '-nowarn'])
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') {
+        expand version: project.version
+    }
+}

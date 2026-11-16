@@ -1,0 +1,26 @@
+package rip.ysm.compat.carryon;
+
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+
+public final class CarryOnDataHelper {
+
+    public enum CarryType {
+        ENTITY,
+        BLOCK,
+        PLAYER,
+        NONE
+    }
+
+    private CarryOnDataHelper() {
+    }
+
+    public static boolean isPlayerCarrying(LivingEntity livingEntity) {
+        return false;
+    }
+
+    public static CarryType getCarryType(Player player) {
+        // Carry On 未安装时返回 NONE（调用方是 switch，不能返回 null）
+        return CarryType.NONE;
+    }
+}

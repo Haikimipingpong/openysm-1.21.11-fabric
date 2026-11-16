@@ -1,0 +1,32 @@
+Provenance and licensing notice
+================================
+
+1) Upstream project
+-------------------
+This repository contains a modified copy of OpenYSM (MIT License),
+Copyright (c) 2026 OpenYSM — https://github.com/OpenYSM/OpenYSM
+
+Upstream OpenYSM targets Minecraft 1.20.1 / Forge ONLY. Its authors did not
+produce, review or endorse this repository.
+
+2) The Minecraft 1.21.11 / Fabric adaptation
+-------------------------------------------
+The 1.21.11 / Fabric adaptation contained here was found inside a third-party
+modpack, distributed as a prebuilt jar (openysm-fabric-2.6.5.9-mc1.21.11.jar)
+with no author, repository, contact information or licence file attached.
+The original author of that adaptation is UNKNOWN to us. The copyright in
+that adaptation belongs to its author, not to this repository.
+
+If you are the author of that adaptation: please open an issue and we will
+add your credit here, in README.md and in fabric.mod.json, or remove the
+repository at your request.
+
+3) Work done in this repository
+-------------------------------
+Cleaning up, fixing, making buildable and documenting the above:
+Copyright (c) 2026 Haikimipingpong, released under the MIT License.
+
+4) Third-party content
+----------------------
+No Minecraft assets and no third-party mod jars are distributed here.
+Bundled model resources: default model CC0; "Wine Fox" model CC BY-NC-SA 4.0.

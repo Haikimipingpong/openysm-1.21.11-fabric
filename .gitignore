@@ -1,0 +1,9 @@
+.gradle/
+.gradle-home/
+build/
+run/
+run-client/
+logs/
+*.log
+libs/
+deferred/
