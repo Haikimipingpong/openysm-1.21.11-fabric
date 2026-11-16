@@ -5,9 +5,10 @@
 > 也能适配 TaCZ。**作者不打算持续维护**——不保证跟进新版本、不保证修 bug、不保证回 issue。
 > 能用就用；不能用就 fork 走，或者自己改。仅作存档与自用发布。
 
+> ## ⚠️ 想适配 TaCZ，就**把配套仓库里的模组也装上**
 > ## 🔗 配套仓库：**[YSM x TaCZ Bridge →](https://github.com/Haikimipingpong/ysm-tacz-bridge)**
-> 用现成的 `openysm-fabric-2.6.5.9` jar（非上游发布）？装那个桥接模组就行，不用改 jar。
-> 用本仓库这份移植源码构建？TaCZ 联动已经内置，**不要再装桥接模组**。
+> 本移植版只带基础兼容层。**枪口火光、抛壳、额外枪包**这些都要靠那个桥接模组才正常。
+> 只装 openysm 就来说「不适配 TaCZ」——这个问题不回答。
 
 > 非官方项目，与 OpenYSM 上游、Yes Steve Model 官方及其作者没有隶属关系，也没有获得任何授权或背书。
 
@@ -75,13 +76,20 @@ Linux / Windows 也能跑，但**没有专门测过**，也没打算测。
 - 上游的 SIMD 加速原生库与 1.21.11 的 `BufferBuilder` 不兼容（`NoSuchFieldError: class_287.buffer`），
   现在会自动回退到 Java 渲染路径，不再崩客户端。
 - TaCZ 联动：`rip/ysm/compat/gun/tacz/fabric/` 下补全了动画状态机、molang 变量与事件实现
-  （公开发布的 Fabric 构建里这块是空壳，见下）。
+  （公开发布的 Fabric 构建里这块是空壳）。但**完整联动要配合 [`ysm-tacz-bridge`](https://github.com/Haikimipingpong/ysm-tacz-bridge)**：
+  本仓库这套实现里 `handleItemSound` 会复位 `isSelf`，额外枪包的火光 / 抛壳得靠桥接模组接管。
 
-## 和另一个仓库的关系
+## 和另一个仓库的关系（要用 TaCZ 就必看）
 
-`ysm-tacz-bridge`（[Haikimipingpong/ysm-tacz-bridge](https://github.com/Haikimipingpong/ysm-tacz-bridge)）
-是一个独立的小桥接模组，用 mixin 给**公开发布的 2.6.5.9 jar** 补上同样的 TaCZ 联动，不需要改那个 jar。
-本仓库则是把 TaCZ 联动直接做进了移植版源码里。两者选一个用即可，不要同时装。
+[`ysm-tacz-bridge`](https://github.com/Haikimipingpong/ysm-tacz-bridge) 是**配套必装件**：
+它用 mixin 把 TaCZ 的完整联动接到 YSM 上——持枪 / 瞄准 / 开火 / 换弹 / 近战状态、
+枪口火光与抛壳、模型专属动作（`tac:hold$tacz:ak47`）、额外枪包。
+
+| 你装了什么 | 结果 |
+|---|---|
+| openysm **+** 桥接模组 + TaCZ | TaCZ 联动完整 |
+| 只装 openysm（不装桥接模组） | 基础动作勉强能跑，**火光 / 抛壳 / 额外枪包不正常**，别问为什么 |
+| 只装桥接模组（没有 YSM） | **完全没效果**，它就是给 YSM 打补丁的 |
 
 ## 安装（玩家向）
 
@@ -89,8 +97,9 @@ Linux / Windows 也能跑，但**没有专门测过**，也没打算测。
 2. 把 `openysm-*-fabric.jar` 丢进 `mods/`。
 3. Fabric API 需要自己装（0.141.6+）。Architectury API 与 Cardinal Components 已经 jar-in-jar 打包，
    不用另装。
-4. 可选：装 TaCZ（Timeless & Classics Zero）Refabricated 后，带 `tac:*` 动画的模型会自动切换
-   持枪/瞄准/开火动作。
+4. 想适配 TaCZ：装 TaCZ（Timeless & Classics Zero）Refabricated，**再加**配套的
+   [`ysm-tacz-bridge`](https://github.com/Haikimipingpong/ysm-tacz-bridge) 一起丢进 `mods/`。
+   只装 TaCZ、不装桥接模组 = 不适配，别来问。
 
 ## 从源码构建
 
@@ -135,6 +144,10 @@ Unofficial; not affiliated with or endorsed by the OpenYSM authors.
 Fabric**, with optional TaCZ support. It is **unmaintained / barely maintained**: no tracking of
 new Minecraft or mod versions, no bug-fix promises, no support. Fork it if you need something
 that lasts.
+
+**TaCZ needs the companion mod.** This port ships a basic TaCZ layer only; muzzle flash, shell
+ejection and extra gun packs come from [YSM x TaCZ Bridge](https://github.com/Haikimipingpong/ysm-tacz-bridge).
+Install both, or don't ask why TaCZ doesn't work.
 
 **Provenance, in short:** upstream OpenYSM ships **Minecraft 1.20.1 / Forge only** — there is no
 1.21.11 or Fabric release by its authors. The 1.21.11 / Fabric code in this repository was **found
