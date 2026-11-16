@@ -1,7 +1,7 @@
 # OpenYSM 1.21.11 / Fabric —— 非官方移植（源码）
 
 > ## 🔗 配套仓库：**[YSM x TaCZ Bridge →](https://github.com/Haikimipingpong/ysm-tacz-bridge)**
-> 用官方的 `openysm-fabric-2.6.5.9` jar？装那个桥接模组就行（不改官方 jar）。
+> 用现成的 `openysm-fabric-2.6.5.9` jar（非上游发布）？装那个桥接模组就行，不用改 jar。
 > 用本仓库这份移植源码构建？TaCZ 联动已经内置，**不要再装桥接模组**。
 
 > 非官方项目，与 OpenYSM 上游、Yes Steve Model 官方及其作者没有隶属关系，也没有获得任何授权或背书。
@@ -21,6 +21,8 @@
 - 本仓库的 1.21.11 / Fabric 版本，是整理者**在一份民间整合包（第三方整合包）里发现的**：
   随整合包分发的只有一个编译好的 `openysm-fabric-2.6.5.9-mc1.21.11.jar`，jar 里没有留下作者、
   没有仓库地址、没有联系方式。**这份移植的最初作者不明。**
+  下文再提到 `openysm-fabric-2.6.5.9` 时，指的都是这份**社区流传的构建**，它**不是**上游发布的版本
+  ——本仓库不会把它称作「官方版」。
 - 因此：**1.21.11 / Fabric 移植部分的著作权属于那位未知的原作者**，本仓库不主张这部分权利。
   本仓库做的事是：把那份 jar 整理成可读、可重新构建的源码，修掉实际遇到的问题，并把来源写清楚。
 - **如果你就是这份移植的作者**：请开一个 issue 说明，我们会把你的署名补到 README、NOTICE
@@ -55,12 +57,12 @@
 - 上游的 SIMD 加速原生库与 1.21.11 的 `BufferBuilder` 不兼容（`NoSuchFieldError: class_287.buffer`），
   现在会自动回退到 Java 渲染路径，不再崩客户端。
 - TaCZ 联动：`rip/ysm/compat/gun/tacz/fabric/` 下补全了动画状态机、molang 变量与事件实现
-  （官方 Fabric 构建里这块是空壳，见下）。
+  （公开发布的 Fabric 构建里这块是空壳，见下）。
 
 ## 和另一个仓库的关系
 
 `ysm-tacz-bridge`（[Haikimipingpong/ysm-tacz-bridge](https://github.com/Haikimipingpong/ysm-tacz-bridge)）
-是一个独立的小桥接模组，用 mixin 给**官方 2.6.5.9 jar** 补上同样的 TaCZ 联动，不需要改官方 jar。
+是一个独立的小桥接模组，用 mixin 给**公开发布的 2.6.5.9 jar** 补上同样的 TaCZ 联动，不需要改那个 jar。
 本仓库则是把 TaCZ 联动直接做进了移植版源码里。两者选一个用即可，不要同时装。
 
 ## 安装（玩家向）
@@ -92,11 +94,11 @@ gradle build --console=plain
 
 - macOS 上拿不到原生 SIMD 加速，模型渲染走 Java 逐顶点路径，大模型 / 多人场景 CPU 开销较高。
 - 1.21.11 的 3D 预览（GUI 里的纸娃娃、模型卡）与原版有差异：纸娃娃「身体固定、头跟随」
-  在这个移植版里很难做到——官方实现依赖 `PreviewEntityRegistry` + render state 朝向，
+  在这个移植版里很难做到——原实现依赖 `PreviewEntityRegistry` + render state 朝向，
   这里朝向来自实体，且动画在 worker 线程计算。
 - 权限系统是降级实现（只判断「是不是本机玩家」），多人服务器的管理命令不可靠。
 - 没有测试用例；只在 macOS + Fabric 0.19.5 上实机跑过。
-- 这是 1.21.11 的适配版，**不要**拿去连 1.20.1 的服务器，也不要和官方 Forge 版混装。
+- 这是 1.21.11 的适配版，**不要**拿去连 1.20.1 的服务器，也不要和 1.20.1 的 Forge 版混装。
 
 ## 许可
 
@@ -123,5 +125,5 @@ Everything here is MIT-licensed, matching upstream. No Mojang assets and no thir
 are included.
 
 **Companion repository:** [YSM x TaCZ Bridge](https://github.com/Haikimipingpong/ysm-tacz-bridge) —
-a mixin patch that adds TaCZ support to the *official* 2.6.5.9 jar. TaCZ support is already built
+a mixin patch that adds TaCZ support to the *publicly distributed* 2.6.5.9 jar. TaCZ support is already built
 into this port, so install one or the other, never both.
